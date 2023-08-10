@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
+  const [isVisible, setIsVisible] = useState(false);
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="wrap">
+      <div className="buttons">
+        <button type="button" onClick={() => setIsVisible(true)}>
+          Show
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <button type="button" onClick={() => setIsVisible(false)}>
+          Hide
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <AnimatePresence>
+        {isVisible && (
+          <motion.div
+            className="box"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            d=(´▽｀)=b
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {!isVisible && (
+          <>
+            <div
+            >
+              Hello
+            </div>
+            <h1>asdf</h1>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
+  );
 }
-
-export default App
